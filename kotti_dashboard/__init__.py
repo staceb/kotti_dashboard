@@ -24,10 +24,9 @@ def kotti_configure(settings):
     """
 
     settings['pyramid.includes'] += ' kotti_dashboard'
-    settings['kotti.alembic_dirs'] += ' kotti_dashboard:alembic'
-    settings['kotti.available_types'] += ' kotti_dashboard.resources.CustomContent'
+    #settings['kotti.available_types'] += ' kotti_dashboard.resources.CustomContent'
     settings['kotti.fanstatic.view_needed'] += ' kotti_dashboard.fanstatic.css_and_js'
-    File.type_info.addable_to.append('CustomContent')
+    #File.type_info.addable_to.append('CustomContent')
 
 
 def includeme(config):
