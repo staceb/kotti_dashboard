@@ -1,0 +1,69 @@
+$ = require 'jquery'
+Backbone = require 'backbone'
+Marionette = require 'backbone.marionette'
+marked = require 'marked'
+
+MainViews = require './views'
+Util = require 'apputil'
+
+MainChannel = Backbone.Radio.channel 'global'
+MessageChannel = Backbone.Radio.channel 'messages'
+ResourceChannel = Backbone.Radio.channel 'resources'
+
+class BaseController extends Backbone.Marionette.Object
+  init_page: () ->
+    # do nothing
+  scroll_top: Util.scroll_top_fast
+  navigate_to_url: Util.navigate_to_url
+  navbar_set_active: Util.navbar_set_active
+
+class MainController extends BaseController
+  mainbus: MainChannel
+  _get_region: (region) ->
+    MainChannel.request 'main:app:get-region', region
+
+  _show_content: (view) ->
+    content = @_get_region 'content'
+    content.show view
+
+  _set_resource: (resource) ->
+    if resource == null
+      id = ""
+    else
+      if resource[0] == '/'
+        id = resource
+      else
+        id = "/#{resource}"
+    @resource_id = id
+    console.log "Resource_Id is ", @resource_id
+    @root_doc = ResourceChannel.request 'get-document', @resource_id
+
+  _make_editbar: ->
+    data = @root_doc.get 'data'
+    user = data.relationships.meta.current_user
+    #console.log "_make_editbar", data
+    editbar = @_get_region 'editbar'
+    # should have better way to check user?
+    if user and 'title' of user
+      #window.editbar = editbar
+      view = new MainViews.EditBarView
+        model: @root_doc
+      editbar.show view
+    else
+      editbar.empty()
+
+  _make_breadcrumbs: ->
+    data = @root_doc.get 'data'
+    breadcrumbs = data.relationships.meta.breadcrumbs
+    bc = @_get_region 'breadcrumbs'
+    if breadcrumbs.length > 1
+      view = new MainViews.BreadCrumbView
+        model: @root_doc
+      bc.show view
+    else
+      bc.empty()
+
+module.exports =
+  BaseController: BaseController
+  MainController: MainController
+
