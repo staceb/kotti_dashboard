@@ -1,0 +1,25 @@
+{
+  "name": "kotti_dashboard",
+  "description": "A dashboard for Kotti.",
+  "main": "index.js",
+  "authors": [
+    "Joseph Rawson"
+  ],
+  "license": "Public Domain",
+  "homepage": "https://github.com/umeboshi2/kotti_dashboard",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-fileinput": "~4.2.7",
+    "TableDnD": "~0.9.1",
+    "tag-it": "aehlke/tag-it"
+  }
+}
