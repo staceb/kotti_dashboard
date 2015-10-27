@@ -14,7 +14,7 @@ size = require 'gulp-size'
 
 # Create a single instance of the compiler to allow caching.
 devCompiler = webpack DevConfig
-gulp.task 'coffee', (callback) ->
+gulp.task 'webpack:coffee', (callback) ->
   # run webpack
   devCompiler.run (err, stats) ->
     throw new gutil.PluginError('webpack:coffee', err) if err
@@ -24,8 +24,8 @@ gulp.task 'coffee', (callback) ->
   return
   
 gulp.task 'default', ->
-  gulp.start 'webpack:build-dev'
+  gulp.start 'webpack:coffee'
   
-gulp.task 'watch', ['coffee'], ->
-  gulp.watch ['./coffee/**/*.coffee'], ['coffee']
+gulp.task 'watch', ['webpack:coffee'], ->
+  gulp.watch ['./coffee/**/*.coffee'], ['webpack:coffee']
   

@@ -4,12 +4,12 @@ webpack = require 'webpack'
 ChunkManifestPlugin = require 'chunk-manifest-webpack-plugin'
 module.exports =
   entry:
-    app: './coffee/kotti_dashboard/application.coffee'
+    app: './coffee/dashboard/application.coffee'
   output:
     path: path.join __dirname, "kotti_dashboard/static"
-    publicPath: '/static/'
-    filename: 'app.js'
-      
+    publicPath: '/static-kotti_dashboard/'
+    filename: 'dashboard.js'
+    
   plugins: [
     new webpack.optimize.DedupePlugin()
     ]
@@ -51,7 +51,7 @@ module.exports =
       ]
   resolve:
     fallback: [
-      path.join __dirname, 'coffee/kotti_dashboard'
+      path.join __dirname, 'coffee/dashboard'
       ]
     alias:
       jquery: 'jquery/src/jquery'

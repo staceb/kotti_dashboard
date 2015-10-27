@@ -21,9 +21,9 @@ require "hallo/src/plugins/reundo"
 require "hallo/src/plugins/image_insert_edit"
 require "hallo/src/plugins/image"
 require "hallo/src/plugins/image/current"
-#require "hallo/src/plugins/block"
-require "hallo/src/plugins/blocktc"
 require "hallo/src/plugins/blacklist"
+#require "hallo/src/plugins/block"
+require "./blocktc"
 
 
 
