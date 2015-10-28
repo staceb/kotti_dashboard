@@ -46,6 +46,15 @@ make_json_post = (url, data, type='POST') ->
 remove_trailing_slashes = (path) ->
   path.replace /\/$/, ""
 
+
+str_startswith = (str, prefix) ->
+  not str.indexOf prefix
+
+str_endswith = (str, suffix) ->
+  str.indexOf(suffix, str.length - (suffix.length)) != -1
+
+
+
 module.exports =
   scroll_top_fast: scroll_top_fast
   navigate_to_url: navigate_to_url
@@ -56,7 +65,9 @@ module.exports =
   make_json_post_settings: make_json_post_settings
   make_json_post: make_json_post
   remove_trailing_slashes: remove_trailing_slashes
-
+  str_startswith: str_startswith
+  str_endswith: str_endswith
+  
 
 
 
