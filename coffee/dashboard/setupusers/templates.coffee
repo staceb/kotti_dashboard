@@ -14,7 +14,8 @@ marked = require 'marked'
 { form_group_input_div } = require 'bootstrap-teacup-templates/coffee/forms'
 { ace_editor_div } = require 'bootstrap-teacup-templates/coffee/misc'
 
-{ capitalize } = require 'apputil'
+{ capitalize
+  str_startswith } = require 'apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 
@@ -78,6 +79,8 @@ search_users_form = tc.renderable (options) ->
 principal_role_row = tc.renderable (entry, available_roles) ->
   principal = entry.principal
   is_group = not principal.name.indexOf 'group:'
+  ## NeedES6 str.startsWith
+  is_group = str_startswith principal.name, 'group:'
   is_user = not is_group
   tc.tr ->
     tc.td ->
