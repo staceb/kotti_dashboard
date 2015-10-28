@@ -29,7 +29,8 @@ class Controller extends MainController
       view = new Views.FrontDoorMainView
         model: @root_doc
       @_show_content view
-
+      data = @root_doc.get('data')
+      $('title').text data.attributes.title
   view_resource: (resource) ->
     #console.log "RESOURCE", resource
     @_set_resource resource

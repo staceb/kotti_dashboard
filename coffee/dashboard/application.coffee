@@ -17,6 +17,8 @@ Views = require './views'
 AppModel = require './appmodel'
 require './collections'
 
+Util = require 'apputil'
+
 #require 'bootstrap-fileinput-css'
 #require 'bootstrap-fileinput-js'
 
@@ -152,9 +154,17 @@ app = new Marionette.Application()
 window.App = app
 
 here = location.pathname
+
+if Util.str_endswith here, '@@dashboard'
+  here = here.split('@@dashboard')[0]
+  #console.log "Strip dashboard..."
+
 #console.log "Here we are", here
 if here == '/'
   here = ''
+
+#console.log "Get-Document", here
+
 current_doc = ResourceChannel.request 'get-document', here
 ResourceChannel.reply 'current-document', ->
   current_doc
@@ -165,7 +175,8 @@ response.done ->
   #console.log "AppModel", AppModel
   prepare_app app, AppModel, current_doc
   app.start()
-
+  data = current_doc.get 'data'
+  $('title').text data.attributes.title
 
 module.exports = app
 
