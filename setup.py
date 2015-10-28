@@ -20,6 +20,7 @@ install_requires = [
     'kotti_tinymce',
     'kotti_jsonapi',
     'kotti_compass',
+    'pyramid_mako',
 ]
 
 
