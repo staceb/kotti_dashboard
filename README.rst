@@ -1,7 +1,10 @@
 kotti_dashboard
 ***************
 
-This is an extension to Kotti that allows to add foo to your site.
+This is an extension to Kotti that adds a dashboard view.
+
+This project depends on https://github.com/umeboshi2/kotti_jsonapi and https://github.com/umeboshi2/kotti_compass
+
 
 |build status|_
 
