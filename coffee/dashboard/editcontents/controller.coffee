@@ -8,8 +8,8 @@ Util = require 'apputil'
 MainViews = require '../views'
 { MainController } = require '../controllers'
 
-Views = require './views'
-Models = require 'models'
+#Views = require './views'
+#Models = require 'models'
 
 MainChannel = Backbone.Radio.channel 'global'
 ResourceChannel = Backbone.Radio.channel 'resources'
@@ -28,31 +28,36 @@ class Controller extends MainController
       @_show_content view
 
   _get_contents_and_render_view: (resource) ->
-    @_set_resource resource
-    res_response = @root_doc.fetch()
-    ## FIXME wrap this in scoping functions
-    res_response.done =>
-      collection = ResourceChannel.request 'get-document-contents', resource
-      cresponse = collection.fetch()
-      cresponse.done =>
-        @_make_editbar()
-        @_make_breadcrumbs()
-        view = new Views.ContentsView
-          model: @root_doc
-          collection: collection
-        @_show_content view
-        #window.ccview = view
+    require.ensure [], () =>
+      Views = require './views'
+      @_set_resource resource
+      res_response = @root_doc.fetch()
+      ## FIXME wrap this in scoping functions
+      res_response.done =>
+        collection = ResourceChannel.request 'get-document-contents', resource
+        cresponse = collection.fetch()
+        cresponse.done =>
+          @_make_editbar()
+          @_make_breadcrumbs()
+          view = new Views.ContentsView
+            model: @root_doc
+            collection: collection
+          @_show_content view
+          #window.ccview = view
         
   manage_contents: (resource) ->
     @_get_contents_and_render_view resource
 
 
   _add_document: ->
-    model = new Models.BaseKottiModel
-    view = new Views.NewDocumentView
-      model: model
-    window.newdocview = view
-    @_show_content view
+    require.ensure [], () =>
+      Models = require 'models'
+      Views = require './views'
+      model = new Models.BaseKottiModel
+      view = new Views.NewDocumentView
+        model: model
+      window.newdocview = view
+      @_show_content view
     
     
 
@@ -66,14 +71,19 @@ class Controller extends MainController
       MessageChannel.request 'display-message', msg, "error"
 
   edit_node: (resource) ->
-    #console.log "EDIT RESOURCE", resource
-    @_set_resource resource
-    @_get_doc_and_render_view Views.EditorView
+    require.ensure [], () =>
+      Views = require './views'
+      #console.log "EDIT RESOURCE", resource
+      @_set_resource resource
+      #console.log "EDIT RESOURCE Views", Views
+      @_get_doc_and_render_view Views.EditorView
 
   ace_edit_node: (resource) ->
-    #console.log "ACE EDIT RESOURCE", resource
-    @_set_resource resource
-    @_get_doc_and_render_view Views.AceEditorView
+    require.ensure [], () =>
+      Views = require './views'
+      #console.log "ACE EDIT RESOURCE", resource
+      @_set_resource resource
+      @_get_doc_and_render_view Views.AceEditorView
 
     
 module.exports = Controller
