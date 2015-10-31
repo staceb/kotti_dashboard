@@ -2,8 +2,20 @@ path = require 'path'
 webpack = require 'webpack'
 
 ChunkManifestPlugin = require 'chunk-manifest-webpack-plugin'
+StatsPlugin = require 'stats-webpack-plugin'
+
 module.exports =
   entry:
+    vendor: [
+      'underscore'
+      'backbone'
+      'backbone.marionette'
+      'radio-shim'
+      'bootstrap'
+      'jquery'
+      'jquery-ui'
+      'teacup'
+      ]
     app: './coffee/dashboard/application.coffee'
   output:
     path: path.join __dirname, "kotti_dashboard/static"
@@ -12,6 +24,10 @@ module.exports =
     
   plugins: [
     new webpack.optimize.DedupePlugin()
+    new webpack.optimize.CommonsChunkPlugin
+      name: 'vendor'
+      filename: 'vendor.js'
+    new StatsPlugin 'stats.json', chunkModules: true
     ]
   module:
     loaders: [

@@ -9,9 +9,6 @@ DevServer = require 'webpack-dev-server'
 DevConfig = require './webpack.config.coffee'
 
 
-size = require 'gulp-size'
-
-
 # Create a single instance of the compiler to allow caching.
 devCompiler = webpack DevConfig
 gulp.task 'webpack:coffee', (callback) ->
