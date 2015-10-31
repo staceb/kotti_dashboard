@@ -25,7 +25,7 @@ def kotti_configure(settings):
 
     settings['pyramid.includes'] += ' kotti_dashboard'
     #settings['kotti.available_types'] += ' kotti_dashboard.resources.CustomContent'
-    settings['kotti.fanstatic.view_needed'] += ' kotti_dashboard.fanstatic.css_and_js'
+    settings['kotti.fanstatic.view_needed'] += ' kotti_dashboard.fanstatic.dashboard'
     #File.type_info.addable_to.append('CustomContent')
 
 

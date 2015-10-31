@@ -14,13 +14,14 @@ from fanstatic import Resource
 
 library = Library("kotti_dashboard", "static")
 
-css = Resource(
+vendor = Resource(
     library,
-    "styles.css",
-    minified="styles.min.css")
-js = Resource(
-    library,
-    "scripts.js",
-    minified="scripts.min.js")
+    'vendor.js',)
 
-css_and_js = Group([css, js])
+dashboard = Resource(
+    library,
+    'dashboard.js',
+    depends=[vendor])
+
+#css_and_js = Group([css, js])
+

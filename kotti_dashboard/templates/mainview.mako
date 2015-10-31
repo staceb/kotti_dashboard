@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
   <head>
     <meta charset="utf-8" />
     <title>Login Welcome to Kotti - Welcome to Kotti</title>
@@ -10,7 +9,6 @@
     <script>
       kotti_context_url = '${request.resource_url(request.context)}'
     </script>
-    <script src="/static-kotti_dashboard/dashboard.js" type="text/javascript"></script>
   </head>
   <body>
   </body>
