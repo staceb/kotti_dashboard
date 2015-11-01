@@ -5,6 +5,7 @@ ManifestPlugin = require 'webpack-manifest-plugin'
 
 ChunkManifestPlugin = require 'chunk-manifest-webpack-plugin'
 StatsPlugin = require 'stats-webpack-plugin'
+Clean = require 'clean-webpack-plugin'
 
 vendor = require './webpack-config/vendor'
 loaders = require './webpack-config/loaders'
@@ -21,17 +22,28 @@ module.exports =
     filename: 'dashboard-[chunkhash].js'
     
   plugins: [
+    new webpack.DefinePlugin
+      'process.env':
+        'NODE_ENV': JSON.stringify 'production'
+    new webpack.optimize.OccurenceOrderPlugin true
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.CommonsChunkPlugin
       name: 'vendor'
       filename: 'vendor-[chunkhash].js'
     new StatsPlugin 'stats.json', chunkModules: true
     new ManifestPlugin()
+    new webpack.optimize.UglifyJsPlugin
+      compress:
+        warnings: false
+    #new ChunkManifestPlugin
+    #  filename: 'chunk-manifest.json'
+    #  manifestVariable: 'webpackManifest'
+    new Clean "kotti_dashboard/static"
     ]
   module:
     loaders: loaders
   resolve:
-   fallback: [
+    fallback: [
       path.join __dirname, 'coffee/dashboard'
       ]
     alias: aliases

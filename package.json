@@ -18,6 +18,8 @@
   "devDependencies": {
     "amd-define-factory-patcher-loader": "^1.0.0",
     "bower": "^1.5.2",
+    "chunk-manifest-webpack-plugin": "0.0.1",
+    "clean-webpack-plugin": "^0.1.4",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
     "css-loader": "^0.20.1",
@@ -31,10 +33,12 @@
     "lodash": "^3.10.1",
     "lodash-cli": "^3.10.1",
     "raw-loader": "^0.5.1",
+    "stats-webpack-plugin": "^0.2.2",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-server": "^1.12.1",
+    "webpack-manifest-plugin": "^0.5.0"
   },
   "dependencies": {
     "backbone.marionette": "^2.4.3",
@@ -44,7 +48,6 @@
     "bootstrap-teacup-templates": "github:umeboshi2/bootstrap-teacup-templates",
     "brace": "^0.5.1",
     "browser-request": "^0.3.3",
-    "chunk-manifest-webpack-plugin": "0.0.1",
     "contentblocks": "^0.1.7",
     "d3": "^3.5.6",
     "hallo": "^1.0.2",

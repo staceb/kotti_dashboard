@@ -9,7 +9,9 @@ from pyramid.view import view_config
 from pyramid.view import view_defaults
 
 from kotti_dashboard import _
-from kotti_dashboard.fanstatic import css_and_js
+from kotti_dashboard.fanstatic import dashboard
+
+from kotti.fanstatic import view_css
 from kotti_dashboard.views import BaseView
 
 from kotti_compass.fanstatic import mystyles, font_awesome
@@ -19,8 +21,11 @@ class DashboardView(BaseView):
     @view_config(name='dashboard', permission='view',
                  renderer='kotti_dashboard:templates/mainview.mako')
     def default_view(self):
-        font_awesome.need()
+        #font_awesome.need()
+        #mystyles['jqueryui']['BlanchedAlmond'].need()
         mystyles['bootstrap-custom']['BlanchedAlmond'].need()
+        #view_css.need()
+        dashboard.need()
         return dict()
     
 
