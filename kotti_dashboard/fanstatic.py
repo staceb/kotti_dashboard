@@ -7,20 +7,27 @@ Created on 2015-10-26
 
 from __future__ import absolute_import
 
+import os
+import json
+
 from fanstatic import Group
 from fanstatic import Library
 from fanstatic import Resource
 
+package_dirname = os.path.dirname(__file__)
+manifest_filename = os.path.join(package_dirname, 'static', 'manifest.json')
+
+manifest = json.load(file(manifest_filename))
 
 library = Library("kotti_dashboard", "static")
 
 vendor = Resource(
     library,
-    'vendor.js',)
+    manifest['vendor.js'],)
 
 dashboard = Resource(
     library,
-    'dashboard.js',
+    manifest['app.js'],
     depends=[vendor])
 
 #css_and_js = Group([css, js])
