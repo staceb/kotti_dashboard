@@ -19,14 +19,9 @@ require './collections'
 
 Util = require 'apputil'
 
-#require 'bootstrap-fileinput-css'
-#require 'bootstrap-fileinput-js'
-
-#require 'vie'
 require 'frontdoor/main'
 require 'editcontents/main'
 require 'setupusers/main'
-
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
