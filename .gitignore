@@ -59,3 +59,10 @@ target/
 
 /bower_components
 /node_modules
+
+# ignore build stats
+/kotti_dashboard/static/stats.json
+
+# ignore source maps (should this be included in package?)
+/kotti_dashboard/static/*.js.map
+
