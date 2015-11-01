@@ -5,6 +5,7 @@ ManifestPlugin = require 'webpack-manifest-plugin'
 
 ChunkManifestPlugin = require 'chunk-manifest-webpack-plugin'
 StatsPlugin = require 'stats-webpack-plugin'
+Clean = require 'clean-webpack-plugin'
 
 vendor = require './webpack-config/vendor'
 loaders = require './webpack-config/loaders'
@@ -37,6 +38,7 @@ module.exports =
     #new ChunkManifestPlugin
     #  filename: 'chunk-manifest.json'
     #  manifestVariable: 'webpackManifest'
+    new Clean "kotti_dashboard/static"
     ]
   module:
     loaders: loaders
