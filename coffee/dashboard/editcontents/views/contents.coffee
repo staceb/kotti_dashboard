@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
-AppModels = require 'models'
+AppModels = require '../../models'
 
 AppTemplates = require '../templates'
 
@@ -11,7 +11,7 @@ require 'jquery-ui'
 #require 'jquery-ui/position'
 
 { remove_trailing_slashes
-  make_json_post } = require 'apputil'
+  make_json_post } = require '../../apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'

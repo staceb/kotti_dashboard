@@ -43,9 +43,6 @@ module.exports =
   module:
     loaders: loaders
   resolve:
-    fallback: [
-      path.join __dirname, 'coffee/dashboard'
-      ]
     alias: aliases
     modulesDirectories: [
       'node_modules'

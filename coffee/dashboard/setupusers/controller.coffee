@@ -3,13 +3,13 @@ Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
 
-Util = require 'apputil'
+Util = require '../apputil'
 
 { MainController } = require '../controllers'
 
 Views = require './views'
 
-Models = require 'models'
+Models = require '../models'
 
 MainChannel = Backbone.Radio.channel 'global'
 ResourceChannel = Backbone.Radio.channel 'resources'

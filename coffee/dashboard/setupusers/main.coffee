@@ -1,8 +1,8 @@
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
-Util = require 'apputil'
-BootStrapAppRouter = require 'bootstrap_router'
+Util = require '../apputil'
+BootStrapAppRouter = require '../bootstrap_router'
 
 Controller = require './controller'
 

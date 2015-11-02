@@ -17,11 +17,11 @@ Views = require './views'
 AppModel = require './appmodel'
 require './collections'
 
-Util = require 'apputil'
+Util = require './apputil'
 
-require 'frontdoor/main'
-require 'editcontents/main'
-require 'setupusers/main'
+require './frontdoor/main'
+require './editcontents/main'
+require './setupusers/main'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'

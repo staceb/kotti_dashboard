@@ -6,14 +6,14 @@ tableDnD = require 'tablednd'
 AppTemplates = require './templates'
 
 { remove_trailing_slashes
-  make_json_post } = require 'apputil'
+  make_json_post } = require '../apputil'
 
-Models = require 'models'
+Models = require '../models'
 
 MainChannel = Backbone.Radio.channel 'global'
 AppChannel = Backbone.Radio.channel 'setupusers'
 
-BootstrapFormView = require 'bootstrap_formview'
+BootstrapFormView = require '../bootstrap_formview'
 
 class DashboardView extends Backbone.Marionette.LayoutView
   template: AppTemplates.user_admin_dashboard

@@ -4,7 +4,7 @@ Marionette = require 'backbone.marionette'
 marked = require 'marked'
 
 
-Util = require 'apputil'
+Util = require '../apputil'
 MainViews = require '../views'
 { MainController } = require '../controllers'
 
@@ -51,7 +51,7 @@ class Controller extends MainController
 
   _add_document: ->
     require.ensure [], () =>
-      Models = require 'models'
+      Models = require '../models'
       Views = require './views'
       model = new Models.BaseKottiModel
       view = new Views.NewDocumentView

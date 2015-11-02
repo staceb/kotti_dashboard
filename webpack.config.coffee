@@ -18,22 +18,19 @@ module.exports =
   output:
     path: path.join __dirname, "kotti_dashboard/static"
     publicPath: '/static-kotti_dashboard/'
-    filename: 'dashboard-[chunkhash].js'
+    filename: 'dashboard-dev.js'
     
   plugins: [
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.CommonsChunkPlugin
       name: 'vendor'
-      filename: 'vendor-[chunkhash].js'
+      filename: 'vendor-dev.js'
     new StatsPlugin 'stats.json', chunkModules: true
     new ManifestPlugin()
     ]
   module:
     loaders: loaders
   resolve:
-   fallback: [
-      path.join __dirname, 'coffee/dashboard'
-      ]
     alias: aliases
     modulesDirectories: [
       'node_modules'

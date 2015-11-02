@@ -15,7 +15,7 @@ marked = require 'marked'
 { ace_editor_div } = require 'bootstrap-teacup-templates/coffee/misc'
 
 { capitalize
-  str_startswith } = require 'apputil'
+  str_startswith } = require '../apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 
