@@ -23,7 +23,7 @@ def kotti_configure(settings):
     :type settings: dict
     """
 
-    settings['pyramid.includes'] += ' kotti_dashboard'
+    settings['pyramid.includes'] += ' kotti_dashboard pyramid_mako'
 
 
 def includeme(config):
