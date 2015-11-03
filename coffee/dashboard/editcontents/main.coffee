@@ -1,8 +1,8 @@
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
-Util = require '../apputil'
-BootStrapAppRouter = require '../bootstrap_router'
+Util = require 'common/apputil'
+BootStrapAppRouter = require 'common/bootstrap_router'
 
 Controller = require './controller'
 
@@ -33,7 +33,7 @@ class Router extends BootStrapAppRouter
     
     
 MainChannel.reply 'applet:editcontents:route', () ->
-  console.log "editcontents:route being handled"
+  if __DEV__ then console.log "editcontents:route being handled"
   controller = new Controller MainChannel
   controller.root_doc = ResourceChannel.request 'current-document'
   router = new Router

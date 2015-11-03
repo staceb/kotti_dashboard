@@ -14,7 +14,7 @@ marked = require 'marked'
 { form_group_input_div } = require 'bootstrap-teacup-templates/coffee/forms'
 { ace_editor_div } = require 'bootstrap-teacup-templates/coffee/misc'
 
-{ capitalize } = require '../apputil'
+{ capitalize } = require 'common/apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 

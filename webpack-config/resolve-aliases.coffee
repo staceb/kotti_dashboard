@@ -8,4 +8,5 @@ module.exports =
   request: 'browser-request'
   'tag-it': 'tag-it/js/tag-it.js'
   'radio-shim': path.join __dirname, 'radio-shim.coffee'
+  common: path.join __dirname, '../coffee/common'
   

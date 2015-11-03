@@ -6,7 +6,7 @@ FDTemplates = require './templates'
 tableDnD = require 'tablednd'
 
 { remove_trailing_slashes
-  make_json_post } = require '../apputil'
+  make_json_post } = require 'common/apputil'
 
 require 'jquery-ui'
 

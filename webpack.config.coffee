@@ -21,6 +21,9 @@ module.exports =
     filename: 'dashboard-dev.js'
     
   plugins: [
+    new webpack.DefinePlugin
+      __DEV__: 'true'
+      DEBUG: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
     new webpack.optimize.DedupePlugin()
     new webpack.optimize.CommonsChunkPlugin
       name: 'vendor'

@@ -8,7 +8,7 @@ AppTemplates = require '../templates'
 
 MainChannel = Backbone.Radio.channel 'global'
 
-BootstrapFormView = require '../../bootstrap_formview'
+BootstrapFormView = require 'common/bootstrap_formview'
 
 class BaseKottiResourceFormView extends BootstrapFormView
   saveModel: ->

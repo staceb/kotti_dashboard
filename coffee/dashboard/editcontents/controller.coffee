@@ -4,12 +4,9 @@ Marionette = require 'backbone.marionette'
 marked = require 'marked'
 
 
-Util = require '../apputil'
+Util = require 'common/apputil'
 MainViews = require '../views'
-{ MainController } = require '../controllers'
-
-#Views = require './views'
-#Models = require 'models'
+{ DashboardController } = require '../controllers'
 
 MainChannel = Backbone.Radio.channel 'global'
 ResourceChannel = Backbone.Radio.channel 'resources'
@@ -17,7 +14,7 @@ MessageChannel = Backbone.Radio.channel 'messages'
 
 
 
-class Controller extends MainController
+class Controller extends DashboardController
   _get_doc_and_render_view: (viewclass) ->
     response = @root_doc.fetch()
     response.done =>
@@ -51,7 +48,7 @@ class Controller extends MainController
 
   _add_document: ->
     require.ensure [], () =>
-      Models = require '../models'
+      Models = require 'common/models'
       Views = require './views'
       model = new Models.BaseKottiModel
       view = new Views.NewDocumentView

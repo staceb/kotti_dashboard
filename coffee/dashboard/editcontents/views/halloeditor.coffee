@@ -33,7 +33,7 @@ rangy = require 'rangy'
 
 
 { remove_trailing_slashes
-  make_json_post } = require '../../apputil'
+  make_json_post } = require 'common/apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 

@@ -3,13 +3,13 @@ Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
 
-Util = require '../apputil'
+Util = require 'common/apputil'
 
-{ MainController } = require '../controllers'
+{ DashboardController } = require '../controllers'
 
 Views = require './views'
 
-Models = require '../models'
+Models = require 'common/models'
 
 MainChannel = Backbone.Radio.channel 'global'
 ResourceChannel = Backbone.Radio.channel 'resources'
@@ -18,7 +18,7 @@ AppChannel = Backbone.Radio.channel 'setupusers'
 
 
 
-class Controller extends MainController
+class Controller extends DashboardController
   _update_views_common: ->
     @_make_editbar()
     @_make_breadcrumbs()

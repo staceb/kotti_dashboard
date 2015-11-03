@@ -3,6 +3,10 @@ Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 require 'radio-shim'
 
+if __DEV__
+  console.warn "__DEV__", __DEV__, "DEBUG", DEBUG
+  Backbone.Radio.DEBUG = true
+
 #if window.__agent
 #  window.__agent.disableAnalytics = true
 #  window.__agent._ = require 'underscore'
@@ -12,12 +16,13 @@ require 'radio-shim'
 
 require 'bootstrap'
 
-Models = require './models'
+Models = require 'common/models'
+Util = require 'common/apputil'
+
 Views = require './views'
 AppModel = require './appmodel'
 require './collections'
 
-Util = require './apputil'
 
 require './frontdoor/main'
 require './editcontents/main'
@@ -27,7 +32,6 @@ MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
 ResourceChannel = Backbone.Radio.channel 'resources'
 
-Backbone.Radio.DEBUG = true
 
 # FIXME
 # sync should probably be overridden in model/collection
@@ -145,8 +149,9 @@ MainChannel.on 'appregion:navbar:displayed', ->
 
 
 app = new Marionette.Application()
-# DEBUG attach app to window
-window.App = app
+if __DEV__
+  # DEBUG attach app to window
+  window.App = app
 
 here = location.pathname
 
@@ -163,16 +168,16 @@ if here == '/'
 current_doc = ResourceChannel.request 'get-document', here
 ResourceChannel.reply 'current-document', ->
   current_doc
-# DEBUG  
-window.current_doc = current_doc
+# DEBUG
+if __DEV__
+  window.current_doc = current_doc
 response = current_doc.fetch()
 response.done ->
-  #console.log "AppModel", AppModel
   prepare_app app, AppModel, current_doc
   app.start()
   data = current_doc.get 'data'
   $('title').text data.attributes.title
-
+  
 module.exports = app
 
 

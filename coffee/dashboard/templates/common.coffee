@@ -16,10 +16,8 @@ frontdoor_url = (path) ->
   "#frontdoor/view#{stripped_path}"
 
 editor_url = (action, path) ->
-  #console.log "action, path", action, path
   rstripped_path = path.replace /\/$/, ""
   lstripped_path = rstripped_path.replace /^\//, ""
-  #console.log "lstripped_path", lstripped_path
   "#editor/#{action}/#{lstripped_path}"
 
 ########################################

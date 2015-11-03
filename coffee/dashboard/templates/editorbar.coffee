@@ -53,7 +53,7 @@ default_view_selector = tc.renderable (doc) ->
 
 
 actions_dropdown = tc.renderable (doc) ->
-  console.log "Actions_Dropdown", doc.id, doc
+  if DEBUG then console.log "Actions_Dropdown", doc.id, doc
   relmeta = doc.data.relationships.meta
   tc.li '.dropdown', ->
     dropdown_toggle ->

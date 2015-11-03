@@ -4,40 +4,15 @@ Marionette = require 'backbone.marionette'
 marked = require 'marked'
 
 MainViews = require './views'
-Util = require './apputil'
+Util = require 'common/apputil'
+
+{ MainController } = require 'common/controllers'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
 ResourceChannel = Backbone.Radio.channel 'resources'
 
-class BaseController extends Backbone.Marionette.Object
-  init_page: () ->
-    # do nothing
-  scroll_top: Util.scroll_top_fast
-  navigate_to_url: Util.navigate_to_url
-  navbar_set_active: Util.navbar_set_active
-
-class MainController extends BaseController
-  mainbus: MainChannel
-  _get_region: (region) ->
-    MainChannel.request 'main:app:get-region', region
-
-  _show_content: (view) ->
-    content = @_get_region 'content'
-    content.show view
-
-  _set_resource: (resource) ->
-    if resource == null
-      id = ""
-    else
-      if resource[0] == '/'
-        id = resource
-      else
-        id = "/#{resource}"
-    @resource_id = id
-    console.log "Resource_Id is ", @resource_id
-    @root_doc = ResourceChannel.request 'get-document', @resource_id
-
+class DashboardController extends MainController
   _make_editbar: ->
     data = @root_doc.get 'data'
     user = data.relationships.meta.current_user
@@ -64,6 +39,5 @@ class MainController extends BaseController
       bc.empty()
 
 module.exports =
-  BaseController: BaseController
-  MainController: MainController
+  DashboardController: DashboardController
 

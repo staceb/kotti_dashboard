@@ -3,7 +3,8 @@ _ = require 'underscore'
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
-Models = require './models'
+Models = require 'common/models'
+{ BaseCollection } = require 'common/collections'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
@@ -37,12 +38,6 @@ kotti_clipboard = new KottiClipboard
 MainChannel.reply 'main:app:kotti-clipboard', ->
   kotti_clipboard
   
-class BaseCollection extends Backbone.Collection
-  # wrap the parsing to retrieve the
-  # 'data' attribute from the json response
-  parse: (response) ->
-    return response.data
-
 class ContentsModel extends Models.BaseKottiResource
   idAttribute: 'oid'
   
