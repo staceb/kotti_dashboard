@@ -42,6 +42,64 @@ Development
 Contributions to kotti_dashboard are highly welcome.
 Just clone its `Github repository`_ and submit your contributions as pull requests.
 
+
+Dashboard Components
+====================
+
+- marionette
+
+- applets
+
+- messages collection view
+
+- clipboard collection
+
+
+TODO
+====
+
+General
+-------
+
+#. Look at possibly using Marionette.Toolkit for applets.
+
+#. Better setup of webpack config.
+
+#. Use Babel for ES6 support and get rid of string functions in apputil
+
+#. Create general viewer app.
+   
+#. Make a kotti resource for markdown documents
+
+Dashboard
+---------
+
+#. Make a good hallo toolbar
+
+   - make new plugins
+
+   - images plugin
+
+   - site images top node
+
+#. Make upload widget
+
+   - use bootstrap fileinput instead of angular
+
+#. Change workflow states.
+
+   - make a rest view to change workflow based on get view in kotti
+
+#. Implement share content
+
+#. Implement add node for any type (need rest view to make object)
+   
+   
+ 
+
+
+
+
 .. _alembic: http://pypi.python.org/pypi/alembic
 .. _alembic documentation: http://alembic.readthedocs.org/en/latest/index.html
 .. _tracker: https://github.com/umeboshi2/kotti_dashboard/issues
