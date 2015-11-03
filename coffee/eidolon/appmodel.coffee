@@ -44,19 +44,7 @@ appmodel = new BaseAppModel
   brand:
     name: 'Kotti'
     url: '/'
-  applets:
-    [
-      {
-        appname: 'editcontents'
-        name: 'Edit Contents'
-        url: '#editor'
-      }
-      {
-        appname: 'setupusers'
-        name: 'Setup Users'
-        url: '#setupusers'
-      }
-    ]
+  applets: []
   regions: appregions
 
 module.exports = appmodel

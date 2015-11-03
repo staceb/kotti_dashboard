@@ -20,8 +20,6 @@ frontdoor_main = tc.renderable (content) ->
 DefaultViewTemplate = tc.renderable (doc) ->
   atts = doc.data.attributes
   tc.article '.document-view.content', ->
-    tc.h1 atts.title
-    tc.p '.lead', atts.description
     tc.div '.body', ->
       tc.raw atts.body
 

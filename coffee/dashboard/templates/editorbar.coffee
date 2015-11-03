@@ -6,7 +6,7 @@ tc = require 'teacup'
   dropdown_toggle } = require 'bootstrap-teacup-templates/coffee/buttons'
   
 { frontdoor_url
-  editor_url } = require './common'
+  editor_url } = require 'common/templates/common'
 
 
 

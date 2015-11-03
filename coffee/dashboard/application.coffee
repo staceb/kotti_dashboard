@@ -1,4 +1,5 @@
 _ = require 'underscore'
+$ = require 'jquery'
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 require 'radio-shim'
@@ -20,9 +21,10 @@ Models = require 'common/models'
 Util = require 'common/apputil'
 BootstrapModalRegion = require 'common/bootstrap_modal'
 
-Views = require './views'
+Views = require 'common/views'
 AppModel = require './appmodel'
 require './collections'
+{ EditBarView } = require './views'
 
 
 require './frontdoor/main'
@@ -47,21 +49,6 @@ ResourceChannel = Backbone.Radio.channel 'resources'
 #  bbsync method, model, options
 
 
-#class BootstrapModalRegion extends Backbone.Marionette.Region
-#  el: '#modal'
-#
-#  getEl: (selector) ->
-#    $el = $ selector
-#    $el.attr 'class', 'modal'
-#    #$el.attr 'class', 'modal fade'
-#    $el
-#
-#  show: (view) ->
-#    super view
-#    @$el.modal
-#      backdrop: false
-#    @$el.modal 'show'
-
 initialize_page = (app, root_doc) ->
   regions = MainChannel.request 'main:app:regions'
   appmodel = MainChannel.request 'main:app:appmodel'
@@ -79,7 +66,7 @@ initialize_page = (app, root_doc) ->
       collection: MessageChannel.request 'messages'
     messages_region = regions.get 'messages'
     messages_region.show messages
-    
+
   # Show the main layout
   mainview = regions.get 'mainview'
   mainview.show layout
@@ -96,7 +83,6 @@ prepare_app = (app, appmodel, root_doc) ->
 
   navbar = region_manager.get 'navbar'
   navbar.on 'show', =>
-      #console.log "we have users for this app....."
       # trigger the display message to create
       # the user menu on the navbar
       MainChannel.trigger 'appregion:navbar:displayed'
@@ -116,7 +102,6 @@ prepare_app = (app, appmodel, root_doc) ->
     MainChannel.request "applet:#{frontdoor}:route"
     for applet in appmodel.get 'applets'
       signal = "applet:#{applet.appname}:route"
-      #console.log "create signal #{signal}"
       MainChannel.request signal
     # build main page layout
     MainChannel.request 'mainpage:init', appmodel, root_doc
@@ -130,7 +115,6 @@ prepare_app = (app, appmodel, root_doc) ->
 # start app setup
 
 MainChannel.reply 'main:app:appmodel', ->
-  #console.log "setHandler main:app:appmodel"
   AppModel
 
 MainChannel.reply 'mainpage:init', (appmodel, root_doc) =>
@@ -147,8 +131,28 @@ MainChannel.on 'appregion:navbar:displayed', ->
   search = MainChannel.request 'main:app:get-region', 'search'
   search.show view
 
+MainChannel.reply 'make-editbar', (doc) ->
+  data = doc.get 'data'
+  user = data.relationships.meta.current_user
+  editbar = MainChannel.request 'main:app:get-region', 'editbar'
+  # FIXME is this best way to check user?
+  if user and 'title' of user
+    view = new EditBarView
+      model: doc
+    editbar.show view
+  else
+    editbar.empty()
+    
 
 
+####################################
+# start doing stuff here
+####################################
+
+if __DEV__
+  $('body').ready ->
+    window.debug_url = $('div#pDebug').find('a').attr('href')
+  
 app = new Marionette.Application()
 if __DEV__
   # DEBUG attach app to window
@@ -158,20 +162,18 @@ here = location.pathname
 
 if Util.str_endswith here, '@@dashboard'
   here = here.split('@@dashboard')[0]
-  #console.log "Strip dashboard..."
 
-#console.log "Here we are", here
 if here == '/'
   here = ''
-
-#console.log "Get-Document", here
 
 current_doc = ResourceChannel.request 'get-document', here
 ResourceChannel.reply 'current-document', ->
   current_doc
+
 # DEBUG
 if __DEV__
   window.current_doc = current_doc
+  
 response = current_doc.fetch()
 response.done ->
   prepare_app app, AppModel, current_doc

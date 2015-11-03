@@ -22,8 +22,6 @@ class BaseKottiModel extends Backbone.Model
     for label of messages
       for msg in messages[label]
         MessageChannel.request 'display-message', msg, label
-    #window.kotti_response = response
-    #window.kotti_options = options
     super response, options
 
 MainChannel.reply 'base-kotti-model', ->
@@ -59,10 +57,6 @@ app_settings = new AppSettings
 MainChannel.reply 'main:app:settings', ->
   app_settings
 
-
-#root_document = new KottiRootDocument
-#MainChannel.reply 'main:app:root-document', ->
-#  root_document
 
 ResourceChannel.reply 'get-document', (path) ->
   new BaseKottiResource

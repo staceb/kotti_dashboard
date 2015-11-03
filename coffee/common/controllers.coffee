@@ -4,6 +4,7 @@ Marionette = require 'backbone.marionette'
 marked = require 'marked'
 
 Util = require 'common/apputil'
+Views = require 'common/views'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
@@ -35,9 +36,20 @@ class MainController extends BaseController
     @resource_id = id
     if DEBUG 
       console.log "Resource_Id is ", @resource_id
-    @root_doc = ResourceChannel.request 'get-document', @resource_id
+    @current_resource = ResourceChannel.request 'get-document', @resource_id
+
+MainChannel.reply 'make-breadcrumbs', (doc) ->
+  data = doc.get 'data'
+  breadcrumbs = data.relationships.meta.breadcrumbs
+  bcregion = MainChannel.request 'main:app:get-region', 'breadcrumbs'
+  if breadcrumbs.length > 1
+    view = new Views.BreadCrumbView
+      model: doc
+    bcregion.show view
+  else
+    bcregion.empty()
+
 
 module.exports =
   BaseController: BaseController
   MainController: MainController
-

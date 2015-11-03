@@ -42,7 +42,6 @@ class ContentsModel extends Models.BaseKottiResource
   idAttribute: 'oid'
   
 class KottiContents extends BaseCollection
-  #model: Models.BaseKottiModel
   model: ContentsModel
   url: ->
     "#{@resource_id}/@@contents-json"
@@ -51,8 +50,6 @@ class KottiContents extends BaseCollection
 ResourceChannel.reply 'get-document-contents', (resource_id) ->
   # if resource_id is null, set to root resource
   resource_id ?= ''
-  #console.log "get-document-contents", resource_id
-  #new KottiContents resource_id: resource_id
   collection = new KottiContents
   collection.resource_id = resource_id
   collection

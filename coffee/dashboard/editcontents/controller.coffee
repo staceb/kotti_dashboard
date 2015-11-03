@@ -5,8 +5,7 @@ marked = require 'marked'
 
 
 Util = require 'common/apputil'
-MainViews = require '../views'
-{ DashboardController } = require '../controllers'
+{ MainController } = require 'common/controllers'
 
 MainChannel = Backbone.Radio.channel 'global'
 ResourceChannel = Backbone.Radio.channel 'resources'
@@ -14,30 +13,30 @@ MessageChannel = Backbone.Radio.channel 'messages'
 
 
 
-class Controller extends DashboardController
+class Controller extends MainController
   _get_doc_and_render_view: (viewclass) ->
-    response = @root_doc.fetch()
+    response = @current_resource.fetch()
     response.done =>
-      @_make_editbar()
-      @_make_breadcrumbs()
+      MainChannel.request 'make-editbar', @current_resource
+      MainChannel.request 'make-breadcrumbs', @current_resource
       view = new viewclass
-        model: @root_doc
+        model: @current_resource
       @_show_content view
 
   _get_contents_and_render_view: (resource) ->
     require.ensure [], () =>
       Views = require './views'
       @_set_resource resource
-      res_response = @root_doc.fetch()
+      res_response = @current_resource.fetch()
       ## FIXME wrap this in scoping functions
       res_response.done =>
         collection = ResourceChannel.request 'get-document-contents', resource
         cresponse = collection.fetch()
         cresponse.done =>
-          @_make_editbar()
-          @_make_breadcrumbs()
+          MainChannel.request 'make-editbar', @current_resource
+          MainChannel.request 'make-breadcrumbs', @current_resource
           view = new Views.ContentsView
-            model: @root_doc
+            model: @current_resource
             collection: collection
           @_show_content view
           #window.ccview = view

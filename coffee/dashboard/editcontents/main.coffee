@@ -35,7 +35,7 @@ class Router extends BootStrapAppRouter
 MainChannel.reply 'applet:editcontents:route', () ->
   if __DEV__ then console.log "editcontents:route being handled"
   controller = new Controller MainChannel
-  controller.root_doc = ResourceChannel.request 'current-document'
+  controller.current_resource = ResourceChannel.request 'current-document'
   router = new Router
     controller: controller
   AppChannel.reply 'contents-changed', =>
