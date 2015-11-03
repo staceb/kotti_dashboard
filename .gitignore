@@ -66,3 +66,6 @@ target/
 # ignore source maps (should this be included in package?)
 /kotti_dashboard/static/*.js.map
 
+# ignore dev builds
+/kotti_dashboard/static/*-dev.js
+

@@ -15,6 +15,7 @@ module.exports =
   entry:
     vendor: vendor
     app: './coffee/dashboard/application.coffee'
+    eidolon: './coffee/eidolon/application.coffee'
   output:
     path: path.join __dirname, "kotti_dashboard/static"
     publicPath: '/static-kotti_dashboard/'

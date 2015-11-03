@@ -18,16 +18,12 @@ require 'bootstrap'
 
 Models = require 'common/models'
 Util = require 'common/apputil'
-BootstrapModalRegion = require 'common/bootstrap_modal'
 
 Views = require './views'
 AppModel = require './appmodel'
-require './collections'
 
 
 require './frontdoor/main'
-require './editcontents/main'
-require './setupusers/main'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
@@ -46,21 +42,6 @@ ResourceChannel = Backbone.Radio.channel 'resources'
 #    Accept: 'application/vnd.api+json'
 #  bbsync method, model, options
 
-
-#class BootstrapModalRegion extends Backbone.Marionette.Region
-#  el: '#modal'
-#
-#  getEl: (selector) ->
-#    $el = $ selector
-#    $el.attr 'class', 'modal'
-#    #$el.attr 'class', 'modal fade'
-#    $el
-#
-#  show: (view) ->
-#    super view
-#    @$el.modal
-#      backdrop: false
-#    @$el.modal 'show'
 
 initialize_page = (app, root_doc) ->
   regions = MainChannel.request 'main:app:regions'
