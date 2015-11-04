@@ -20,8 +20,6 @@ DefaultViewTemplate = tc.renderable (doc) ->
   atts = doc.data.attributes
   doctype = doc.data.type
   tc.article '.document-view.content', ->
-    tc.h1 atts.title
-    tc.p '.lead', atts.description
     tc.div '.body', ->
       if doctype == 'Document'
         tc.raw atts.body

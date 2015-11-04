@@ -7,8 +7,10 @@ AppTemplates = require '../templates'
 MainChannel = Backbone.Radio.channel 'global'
 
 ace = require 'brace'
-html_mode = require 'brace/mode/html'
-twilight_theme = require 'brace/theme/twilight'
+require 'brace/mode/html'
+require 'brace/mode/markdown'
+require 'brace/theme/twilight'
+require 'brace/theme/cobalt'
 
 beautify = require('js-beautify').html
 
@@ -25,11 +27,9 @@ class AceEditorView extends KottiResourceFormView
     editor: '#ace-editor'
      
   createModel: ->
-    #console.log "Model url", @model.url()
     @model
     
   updateModel: ->
-    #console.log "Model", @model
     data = @model.get 'data'
     atts = data.attributes
     for a in ['title', 'description']
@@ -38,7 +38,6 @@ class AceEditorView extends KottiResourceFormView
     # FIXME!!!!
     atts.tags = []
     @model.set "data", data
-    #console.log "model updated", @model, @model.url()
     
   onDomRefresh: () ->
     @editor = ace.edit @editorContainer
@@ -47,7 +46,6 @@ class AceEditorView extends KottiResourceFormView
     session.setMode @editorMode
     data = @model.get 'data'
     content = data.attributes.body
-    content = beautify content
     @editor.setValue content
     super()
     

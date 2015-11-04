@@ -6,14 +6,14 @@ tableDnD = require 'tablednd'
 AppTemplates = require './templates'
 
 { remove_trailing_slashes
-  make_json_post } = require 'apputil'
+  make_json_post } = require 'common/apputil'
 
-Models = require 'models'
+Models = require 'common/models'
 
 MainChannel = Backbone.Radio.channel 'global'
 AppChannel = Backbone.Radio.channel 'setupusers'
 
-BootstrapFormView = require 'bootstrap_formview'
+BootstrapFormView = require 'common/bootstrap_formview'
 
 class DashboardView extends Backbone.Marionette.LayoutView
   template: AppTemplates.user_admin_dashboard
@@ -23,16 +23,13 @@ class DashboardView extends Backbone.Marionette.LayoutView
     usercontent: '#useradmin-content'
     
 
-#class SetupUsersMainView extends Backbone.Marionette.ItemView
-#  template: AppTemplates.setup_users_main
-
 class SearchUsersView extends BootstrapFormView
   template: AppTemplates.search_users_form
   ui:
     query: 'input[name="query"]'
     
   createModel: ->
-    # we can't do
+    # we can't do "return"
     # new MainChannel.request 'base-kotti-model'
     mclass = MainChannel.request 'base-kotti-model'
     new mclass
@@ -44,7 +41,6 @@ class SearchUsersView extends BootstrapFormView
     
   saveModel: ->
     callbacks =
-      #success: => @trigger 'save:form:success', @model
       success: (model, response) =>
         @onSuccess @model, response
       error: => @trigger 'save:form:failure', @model
@@ -53,7 +49,6 @@ class SearchUsersView extends BootstrapFormView
 
   onSuccess: (model, response) ->
     @render()
-    console.log "model, response, options", model, response
     AppChannel.request 'search-results-returned', response.data
     
     

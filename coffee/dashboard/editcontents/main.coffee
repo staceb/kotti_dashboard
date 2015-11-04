@@ -1,8 +1,8 @@
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
-Util = require 'apputil'
-BootStrapAppRouter = require 'bootstrap_router'
+Util = require 'common/apputil'
+BootStrapAppRouter = require 'common/bootstrap_router'
 
 Controller = require './controller'
 
@@ -18,11 +18,14 @@ class Router extends BootStrapAppRouter
     'editor/contents': 'manage_contents'
     'editor/contents/*resource': 'manage_contents'
     
-    'editor/edit': 'edit_node'
-    'editor/edit/*resource': 'edit_node'
+    'editor/edit': 'ace_edit_node'
+    'editor/edit/*resource': 'ace_edit_node'
     
-    'editor/aceedit': 'ace_edit_node'
-    'editor/aceedit/*resource': 'ace_edit_node'
+    'editor/ace-edit': 'ace_edit_node'
+    'editor/ace-edit/*resource': 'ace_edit_node'
+    
+    'editor/hallo-edit': 'hallo_edit_node'
+    'editor/hallo-edit/*resource': 'hallo_edit_node'
 
     'editor/addnode': 'add_node'
     'editor/addnode/*resource': 'add_node'
@@ -33,9 +36,9 @@ class Router extends BootStrapAppRouter
     
     
 MainChannel.reply 'applet:editcontents:route', () ->
-  console.log "editcontents:route being handled"
+  if __DEV__ then console.log "editcontents:route being handled"
   controller = new Controller MainChannel
-  controller.root_doc = ResourceChannel.request 'current-document'
+  controller.current_resource = ResourceChannel.request 'current-document'
   router = new Router
     controller: controller
   AppChannel.reply 'contents-changed', =>

@@ -1,5 +1,4 @@
 _ = require 'underscore'
-$ = require 'jquery'
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 require 'radio-shim'
@@ -19,21 +18,19 @@ require 'bootstrap'
 
 Models = require 'common/models'
 Util = require 'common/apputil'
+Views = require 'common/views'
 BootstrapModalRegion = require 'common/bootstrap_modal'
 
-Views = require 'common/views'
 AppModel = require './appmodel'
-require './collections'
-{ EditBarView } = require './views'
-
+{ BootstrapNavBarView
+  MainSearchFormView } = require './views'
 
 require './frontdoor/main'
-require './editcontents/main'
-require './setupusers/main'
 
 MainChannel = Backbone.Radio.channel 'global'
 MessageChannel = Backbone.Radio.channel 'messages'
 ResourceChannel = Backbone.Radio.channel 'resources'
+AppName = 'eidolon'
 
 
 # FIXME
@@ -58,7 +55,7 @@ initialize_page = (app, root_doc) ->
   # the navbar when it is shown.  This assures us
   # that the $el is present in the DOM. 
   layout.on 'show', =>
-    navbar = new Views.BootstrapNavBarView
+    navbar = new BootstrapNavBarView
       model: root_doc
     navbar_region = regions.get 'navbar'
     navbar_region.show navbar
@@ -66,7 +63,7 @@ initialize_page = (app, root_doc) ->
       collection: MessageChannel.request 'messages'
     messages_region = regions.get 'messages'
     messages_region.show messages
-
+    
   # Show the main layout
   mainview = regions.get 'mainview'
   mainview.show layout
@@ -126,23 +123,10 @@ MainChannel.reply 'mainpage:init', (appmodel, root_doc) =>
   MainChannel.trigger 'mainpage:displayed'
 
 MainChannel.on 'appregion:navbar:displayed', ->
-  view = new Views.MainSearchFormView
+  view = new MainSearchFormView
     model: ResourceChannel.request 'current-document'
   search = MainChannel.request 'main:app:get-region', 'search'
   search.show view
-
-MainChannel.reply 'make-editbar', (doc) ->
-  data = doc.get 'data'
-  user = data.relationships.meta.current_user
-  editbar = MainChannel.request 'main:app:get-region', 'editbar'
-  # FIXME is this best way to check user?
-  if user and 'title' of user
-    view = new EditBarView
-      model: doc
-    editbar.show view
-  else
-    editbar.empty()
-    
 
 
 ####################################
@@ -153,6 +137,8 @@ if __DEV__
   $('body').ready ->
     window.debug_url = $('div#pDebug').find('a').attr('href')
   
+
+
 app = new Marionette.Application()
 if __DEV__
   # DEBUG attach app to window
@@ -160,8 +146,9 @@ if __DEV__
 
 here = location.pathname
 
-if Util.str_endswith here, '@@dashboard'
-  here = here.split('@@dashboard')[0]
+if Util.str_endswith here, '@@eidolon'
+  here = here.split('@@eidolon')[0]
+  if __DEV__ then console.log "Strip eidolon..."
 
 if here == '/'
   here = ''
@@ -173,7 +160,7 @@ ResourceChannel.reply 'current-document', ->
 # DEBUG
 if __DEV__
   window.current_doc = current_doc
-  
+
 response = current_doc.fetch()
 response.done ->
   prepare_app app, AppModel, current_doc

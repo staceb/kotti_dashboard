@@ -4,8 +4,6 @@ Marionette = require 'backbone.marionette'
 AppTemplates = require '../templates'
 
 require 'jquery-ui'
-#require 'jquery-ui/widget'
-#require 'jquery-ui/position'
 
 require "hallo/src/hallo"
 require "hallo/src/widgets/dropdownbutton"
@@ -33,7 +31,7 @@ rangy = require 'rangy'
 
 
 { remove_trailing_slashes
-  make_json_post } = require 'apputil'
+  make_json_post } = require 'common/apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 
@@ -45,7 +43,6 @@ class EditorView extends KottiResourceFormView
     body: '#document-body'
   
   createModel: ->
-    #console.log "Model url", @model.url()
     @model
 
   onDomRefresh: ->
@@ -67,7 +64,6 @@ class EditorView extends KottiResourceFormView
         
 
   updateModel: ->
-    #console.log "Model", @model
     data = @model.get 'data'
     atts = data.attributes
     for a in ['title', 'description']
@@ -76,7 +72,6 @@ class EditorView extends KottiResourceFormView
     # FIXME!!!!
     atts.tags = []
     @model.set "data", data
-    #console.log "model updated", @model, @model.url()
     
     
     

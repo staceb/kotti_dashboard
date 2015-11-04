@@ -13,7 +13,6 @@ Views = require './views'
 
 class Controller extends MainController
   make_main_content: ->
-    MainChannel.request 'make-editbar', @current_resource
     view = new Views.FrontDoorMainView
       model: @current_resource
     @_show_content view
@@ -21,7 +20,6 @@ class Controller extends MainController
   _view_resource: ->
     response = @current_resource.fetch()
     response.done =>
-      MainChannel.request 'make-editbar', @current_resource
       data = @current_resource.get('data')
       meta = @current_resource.get('meta')
       # we don't know we need to request the server

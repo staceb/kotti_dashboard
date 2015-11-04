@@ -7,14 +7,14 @@ marked = require 'marked'
   
 
 { frontdoor_url
-  editor_url } = require '../templates/common'
+  editor_url } = require 'common/templates/common'
 
 { workflow_dropdown } = require '../templates/editorbar'
 
 { form_group_input_div } = require 'bootstrap-teacup-templates/coffee/forms'
 { ace_editor_div } = require 'bootstrap-teacup-templates/coffee/misc'
 
-{ capitalize } = require 'apputil'
+{ capitalize } = require 'common/apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 

@@ -7,7 +7,7 @@ marked = require 'marked'
   
 
 { frontdoor_url
-  editor_url } = require '../templates/common'
+  editor_url } = require 'common/templates/common'
 
 { workflow_dropdown } = require '../templates/editorbar'
 
@@ -15,7 +15,7 @@ marked = require 'marked'
 { ace_editor_div } = require 'bootstrap-teacup-templates/coffee/misc'
 
 { capitalize
-  str_startswith } = require 'apputil'
+  str_startswith } = require 'common/apputil'
 
 MainChannel = Backbone.Radio.channel 'global'
 
@@ -92,7 +92,6 @@ principal_role_row = tc.renderable (entry, available_roles) ->
       if principal?.email
         tc.div "<#{principal.email}>"
     for role in available_roles
-      console.log "ROLE", role
       tc.td ->
         attributes =
           type: 'checkbox'
