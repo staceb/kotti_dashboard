@@ -92,7 +92,6 @@ principal_role_row = tc.renderable (entry, available_roles) ->
       if principal?.email
         tc.div "<#{principal.email}>"
     for role in available_roles
-      console.log "ROLE", role
       tc.td ->
         attributes =
           type: 'checkbox'

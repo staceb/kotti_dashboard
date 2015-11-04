@@ -7,10 +7,12 @@ AppTemplates = require '../templates'
 MainChannel = Backbone.Radio.channel 'global'
 
 ace = require 'brace'
-html_mode = require 'brace/mode/html'
-twilight_theme = require 'brace/theme/twilight'
 
 beautify = require('js-beautify').html
+require 'brace/mode/html'
+require 'brace/mode/markdown'
+require 'brace/theme/twilight'
+require 'brace/theme/cobalt'
 
 
 { BaseKottiResourceFormView } = require './base'
@@ -25,21 +27,32 @@ class NewDocumentView extends KottiResourceFormView
   ui:
     editor: '#ace-editor'
   
+  saveModel: ->
+    callbacks =
+      success: => @trigger 'save:form:success', @model
+      error: => @trigger 'save:form:failure', @model
+      patch: false
+    @model.save @model.attributes, callbacks
+    
   createModel: ->
-    #console.log "Model url", @model.url()
     @model
     
   updateModel: ->
-    #console.log "Model", @model
-    data = @model.get 'data'
-    atts = data.attributes
-    for a in ['title', 'description']
-      atts[a] = @ui[a].val()
+    data = @model.get('data') || {}
+    atts = {}
+    atts.title = @ui.title.val()
+    atts.description = @ui.description.val()
     atts.body = @editor.getValue()
+    data.attributes = atts
+    data.type = @model.content_type
     # FIXME!!!!
     atts.tags = []
     @model.set "data", data
-    #console.log "model updated", @model, @model.url()
+    # we set the id to trick backbone into
+    # thinking that we are performing an update
+    # instead of an insert, since jsonapi seems
+    # to desire a PUT for this.
+    @model.set "id", "please_put_me"
     
   onDomRefresh: () ->
     @editor = ace.edit @editorContainer

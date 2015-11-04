@@ -35,7 +35,7 @@ class MainController extends BaseController
         id = "/#{resource}"
     @resource_id = id
     if DEBUG 
-      console.log "Resource_Id is ", @resource_id
+      console.debug "Resource_Id is ", @resource_id
     @current_resource = ResourceChannel.request 'get-document', @resource_id
 
 MainChannel.reply 'make-breadcrumbs', (doc) ->

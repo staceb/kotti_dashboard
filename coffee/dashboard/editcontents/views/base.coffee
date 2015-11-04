@@ -28,7 +28,6 @@ class BaseKottiResourceFormView extends BootstrapFormView
     
   onDomRefresh: ->
   #  FIXME implement tags
-  #  console.log "onDomRefresh, BaseKottiResourceFormView", @ui
   #  @ui.tags.tagit
   #    availableTags: []
   #    allowSpaces: true

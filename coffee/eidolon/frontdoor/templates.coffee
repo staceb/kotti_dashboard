@@ -15,13 +15,20 @@ marked = require 'marked'
 ########################################
 frontdoor_main = tc.renderable (content) ->
   tc.raw content.data.attributes.body
-  #tc.div 'hello there'
-  #
+
 DefaultViewTemplate = tc.renderable (doc) ->
   atts = doc.data.attributes
+  doctype = doc.data.type
   tc.article '.document-view.content', ->
     tc.div '.body', ->
-      tc.raw atts.body
+      if doctype == 'Document'
+        tc.raw atts.body
+      else if doctype == 'MarkDownDocument'
+        tc.raw marked atts.body
+      else
+        console.warn "Don't know how to render #{doctype}"
+        
+        
 
 FolderViewTemplate = tc.renderable (doc) ->
   atts = doc.data.attributes

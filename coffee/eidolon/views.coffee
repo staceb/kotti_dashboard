@@ -9,9 +9,7 @@ MessageChannel = Backbone.Radio.channel 'messages'
 
 class BootstrapNavBarView extends Backbone.Marionette.LayoutView
   template: NavTemplates.nav_pt
-  window.NavTemplates = NavTemplates
   regions:
-    #navbarview: '#navbar-view'
     usermenu: '#user-menu'
     mainmenu: '#main-menu'
 

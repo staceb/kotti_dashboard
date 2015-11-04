@@ -11,9 +11,7 @@ MessageChannel = Backbone.Radio.channel 'messages'
 
 class BootstrapNavBarView extends Backbone.Marionette.LayoutView
   template: NavTemplates.nav_pt
-  window.NavTemplates = NavTemplates
   regions:
-    #navbarview: '#navbar-view'
     usermenu: '#user-menu'
     mainmenu: '#main-menu'
 
@@ -38,7 +36,6 @@ class MessageView extends Backbone.Marionette.ItemView
     'click @ui.close_button': 'destroy_message'
 
   destroy_message: ->
-    #console.log "Destroy message", @model.get("content")
     MessageChannel.request 'delete-message', @model
     
 class MessagesView extends Backbone.Marionette.CollectionView

@@ -10,7 +10,7 @@ if __DEV__
 #if window.__agent
 #  window.__agent.disableAnalytics = true
 #  window.__agent._ = require 'underscore'
-#  console.log "window.__agent", window.__agent
+#  console.debug "window.__agent", window.__agent
 #  window.__agent.start Backbone, Marionette
   
 

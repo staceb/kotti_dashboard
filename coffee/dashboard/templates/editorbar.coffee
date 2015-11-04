@@ -6,7 +6,8 @@ tc = require 'teacup'
   dropdown_toggle } = require 'bootstrap-teacup-templates/coffee/buttons'
   
 { frontdoor_url
-  editor_url } = require 'common/templates/common'
+  editor_url
+  user_menu_dropdown } = require 'common/templates/common'
 
 
 
@@ -53,7 +54,6 @@ default_view_selector = tc.renderable (doc) ->
 
 
 actions_dropdown = tc.renderable (doc) ->
-  if DEBUG then console.log "Actions_Dropdown", doc.id, doc
   relmeta = doc.data.relationships.meta
   tc.li '.dropdown', ->
     dropdown_toggle ->
@@ -86,36 +86,6 @@ add_dropdown = tc.renderable (doc) ->
         tc.li ->
           # FIXME i18n
           tc.a href:relmeta.upload_url, 'Upload Content'
-
-user_menu_dropdown = tc.renderable (doc) ->
-  relmeta = doc.data.relationships.meta
-  user = relmeta.current_user
-  tc.li '.dropdown.pull-right', ->
-    dropdown_toggle ->
-      tc.text user.title
-      tc.b '.caret'
-    tc.ul '#user-dropdown.dropdown-menu', ->
-      tc.li ->
-        tc.a href:user.prefs_url, ->
-          tc.i '.fa.fa-gears.fa-fw'
-          # FIXME i18n
-          tc.span "Preferences"
-      if relmeta.has_permission.admin
-        tc.li '.divider'
-        tc.li '.dropdown-header', role:'presentation', ->
-          # FIXME i18n
-          tc.text "Site Setup"
-        tc.li ->
-          tc.a href:"#setupusers", "User Administration"
-        for link in relmeta.site_setup_links
-          tc.li ->
-            tc.a href:link.url, link.title
-      tc.li ->
-        # FIXME - fix logout href
-        tc.a href:'/@@logout', ->
-          tc.i '.fa.fa-sign-out.fa-fw'
-          # FIXME i18n
-          tc.span 'Logout'
 
 editor_bar_pt_content = tc.renderable (doc) ->
   relmeta = doc.data.relationships.meta

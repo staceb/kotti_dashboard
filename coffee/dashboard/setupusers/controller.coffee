@@ -27,7 +27,6 @@ class Controller extends MainController
     
   _setup_dashboard: ->
     content = @_get_region 'content'
-    console.log "content.currentView", content.currentView
     if content.currentView instanceof Views.DashboardView
       return
     view = new Views.DashboardView

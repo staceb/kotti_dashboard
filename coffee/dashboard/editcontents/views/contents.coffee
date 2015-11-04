@@ -137,9 +137,8 @@ class ContentsView extends Backbone.Marionette.CompositeView
         msg = "#{name} performed on #{selected_models.length} models"
         MessageChannel.request 'display-message', msg, 'success'
       else
-        console.log "Handle paste"
+        console.warn "Need to Handle paste"
     else if name == 'delete_nodes'
-      #console.log 'show modal delete dialog'
       @handle_delete_action selected_models
     else if name in ['up', 'down']
       @handle_up_down name, selected_models

@@ -22,10 +22,21 @@ class Controller extends MainController
     response = @current_resource.fetch()
     response.done =>
       MainChannel.request 'make-editbar', @current_resource
-      view = new Views.FrontDoorMainView
+      data = @current_resource.get('data')
+      meta = @current_resource.get('meta')
+      # we don't know we need to request the server
+      # for children until we get the default view
+      # for the resource.
+      if meta.default_view == 'folder_view'
+        # FIXME need to make new folder view with
+        # a collection view 'get-document-contents'
+        #viewclass = Views.FolderView
+        viewclass = Views.FrontDoorMainView
+      else
+        viewclass = Views.FrontDoorMainView
+      view = new viewclass
         model: @current_resource
       @_show_content view
-      data = @current_resource.get('data')
       $('title').text data.attributes.title
       MainChannel.request 'make-breadcrumbs', @current_resource
       
