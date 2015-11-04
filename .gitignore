@@ -62,6 +62,7 @@ target/
 
 # ignore build stats
 /kotti_dashboard/static/stats.json
+/kotti_dashboard/static/stats-dev.json
 
 # ignore source maps (should this be included in package?)
 /kotti_dashboard/static/*.js.map
