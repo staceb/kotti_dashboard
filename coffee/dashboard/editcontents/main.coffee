@@ -18,11 +18,14 @@ class Router extends BootStrapAppRouter
     'editor/contents': 'manage_contents'
     'editor/contents/*resource': 'manage_contents'
     
-    'editor/edit': 'edit_node'
-    'editor/edit/*resource': 'edit_node'
+    'editor/edit': 'ace_edit_node'
+    'editor/edit/*resource': 'ace_edit_node'
     
-    'editor/aceedit': 'ace_edit_node'
-    'editor/aceedit/*resource': 'ace_edit_node'
+    'editor/ace-edit': 'ace_edit_node'
+    'editor/ace-edit/*resource': 'ace_edit_node'
+    
+    'editor/hallo-edit': 'hallo_edit_node'
+    'editor/hallo-edit/*resource': 'hallo_edit_node'
 
     'editor/addnode': 'add_node'
     'editor/addnode/*resource': 'add_node'

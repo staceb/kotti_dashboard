@@ -63,8 +63,9 @@ actions_dropdown = tc.renderable (doc) ->
       for link in relmeta.link_parent
         tc.li ->
           tc.a href:"#", link.title
-      tc.li ->
-        tc.a href:"#editor/aceedit#{doc.id}", "Ace Edit"
+      if doc.data.type == 'Document'
+        tc.li ->
+          tc.a href:"#editor/hallo-edit#{doc.id}", "On Page Edit"
       default_view_selector doc
 
 

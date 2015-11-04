@@ -94,7 +94,7 @@ class Controller extends MainController
         msg = "Unable to add type #{content_type}"
         MessageChannel.request 'display-message', msg, "error"
 
-  edit_node: (resource) ->
+  hallo_edit_node: (resource) ->
     require.ensure [], () =>
       Views = require './views'
       @_set_resource resource
