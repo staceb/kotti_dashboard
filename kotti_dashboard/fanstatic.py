@@ -27,7 +27,12 @@ vendor = Resource(
 
 dashboard = Resource(
     library,
-    manifest['app.js'],
+    manifest['dashboard.js'],
+    depends=[vendor])
+
+eidolon = Resource(
+    library,
+    manifest['eidolon.js'],
     depends=[vendor])
 
 #css_and_js = Group([css, js])
