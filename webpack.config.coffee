@@ -6,20 +6,17 @@ ManifestPlugin = require 'webpack-manifest-plugin'
 ChunkManifestPlugin = require 'chunk-manifest-webpack-plugin'
 StatsPlugin = require 'stats-webpack-plugin'
 
-vendor = require './webpack-config/vendor'
 loaders = require './webpack-config/loaders'
 aliases = require './webpack-config/resolve-aliases'
+entries = require './webpack-config/entries'
 
 module.exports =
   devtool: 'source-map'
-  entry:
-    vendor: vendor
-    app: './coffee/dashboard/application.coffee'
-    eidolon: './coffee/eidolon/application.coffee'
+  entry: entries
   output:
     path: path.join __dirname, "kotti_dashboard/static"
     publicPath: '/static-kotti_dashboard/'
-    filename: 'dashboard-dev.js'
+    filename: '[name]-dev.js'
     
   plugins: [
     new webpack.DefinePlugin
@@ -29,7 +26,7 @@ module.exports =
     new webpack.optimize.CommonsChunkPlugin
       name: 'vendor'
       filename: 'vendor-dev.js'
-    new StatsPlugin 'stats.json', chunkModules: true
+    new StatsPlugin 'stats-dev.json', chunkModules: true
     new ManifestPlugin()
     ]
   module:
