@@ -1,8 +1,8 @@
 {
-  "vendor.js": "vendor-ddbe026d09e8fb9591da.js",
-  "vendor.js.map": "vendor-ddbe026d09e8fb9591da.js.map",
-  "dashboard.js": "dashboard-5819ed7b13643ac89a7e.js",
-  "dashboard.js.map": "dashboard-5819ed7b13643ac89a7e.js.map",
-  "eidolon.js": "eidolon-a120b071fdca223101c1.js",
-  "eidolon.js.map": "eidolon-a120b071fdca223101c1.js.map"
+  "dashboard.js": "dashboard-dev.js",
+  "dashboard.js.map": "dashboard-dev.js.map",
+  "eidolon.js": "eidolon-dev.js",
+  "eidolon.js.map": "eidolon-dev.js.map",
+  "vendor.js": "vendor-dev.js",
+  "vendor.js.map": "vendor-dev.js.map"
 }

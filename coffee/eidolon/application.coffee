@@ -15,6 +15,7 @@ if __DEV__
   
 
 require 'bootstrap'
+FB = require 'fb'
 
 Models = require 'common/models'
 Util = require 'common/apputil'
@@ -136,7 +137,33 @@ MainChannel.on 'appregion:navbar:displayed', ->
 if __DEV__
   $('body').ready ->
     window.debug_url = $('div#pDebug').find('a').attr('href')
+
+updateStatusCallback = (args) ->
+  console.debug "updateStatusCallback-->", args
+  args
   
+window.statchange = updateStatusCallback
+
+# Facebook Setup
+#$(document).ready ->
+#  console.debug "Facebook Setup"
+#  $.ajaxSetup
+#    cache: true
+#  console.debug "getscript"
+#  $.getScript "//connect.facebook.net/en_US/sdk.js", ->
+#    console.debug "perform fb.init"
+#$(document).ready ->
+#    FB.init
+#      appId: '1508237436143014'
+#      xfbml: true
+#      version: 'v2.5'
+#    console.debug "fb.init concluded", FB
+#    $('#loginbutton,#feedbutton').removeAttr 'disabled'
+#    FB.getLoginStatus updateStatusCallback
+#    console.debug "Called getLoginStatus"
+    
+    
+      
 
 
 app = new Marionette.Application()
@@ -167,6 +194,13 @@ response.done ->
   app.start()
   data = current_doc.get 'data'
   $('title').text data.attributes.title
+  console.log "FBFBFB", FB
+  FB.init
+    appId: '1508237436143014'
+    xfbml: true
+    cookie: true
+    version: 'v2.5'
+
   
 module.exports = app
 

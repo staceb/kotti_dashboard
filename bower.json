@@ -20,6 +20,10 @@
   "dependencies": {
     "bootstrap-fileinput": "~4.2.7",
     "TableDnD": "~0.9.1",
-    "tag-it": "aehlke/tag-it"
+    "tag-it": "aehlke/tag-it",
+    "facebook-node-sdk": "node-facebook/facebook-node-sdk#v1.0.0-beta2"
+  },
+  "resolutions": {
+    "facebook-node-sdk": "v1.0.0-beta2"
   }
 }
